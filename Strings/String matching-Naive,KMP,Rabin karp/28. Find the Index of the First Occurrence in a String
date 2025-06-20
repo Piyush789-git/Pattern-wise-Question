@@ -1,0 +1,14 @@
+class Solution {
+public:
+    int strStr(string haystack, string needle) {
+        if (needle.empty()) return 0;
+
+    // Use the find method of std::string to locate the needle in the haystack.
+    size_t index = haystack.find(needle);
+
+    // If found, return the index; otherwise, return -1.
+    return (index != string::npos) ? static_cast<int>(index) : -1;
+}
+ 
+    
+};
