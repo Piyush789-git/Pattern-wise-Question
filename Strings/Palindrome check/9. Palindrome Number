@@ -1,0 +1,34 @@
+class Solution {
+public:
+    bool isPalindrome(int x) {
+         if (x < 0) {
+            return false;  // Negative numbers are not palindromes
+        }
+        int temp;
+        int reverse = 0;
+         temp=x;
+    while(temp!=0){
+        int lastDigit = temp % 10;
+
+            // Check if reverse * 10 + lastDigit will cause overflow
+            if (reverse > (INT_MAX - lastDigit) / 10) {
+                return false;  // This will overflow, so return false
+            }
+
+            reverse = reverse * 10 + lastDigit;
+            temp = temp / 10;
+        }
+        if(reverse==x)
+        {
+return true;
+        }
+    else{
+        return false;
+    }
+   
+
+
+
+
+    }     
+};
