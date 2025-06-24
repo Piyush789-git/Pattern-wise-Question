@@ -1,0 +1,44 @@
+class Solution {
+public:
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+ vector<vector<int>> result;
+        int n = nums.size();
+        sort(nums.begin(), nums.end()); // Sort the array
+        for(int j=0;j<n-3;j++){
+             // Skip duplicate elements for the first element
+            if (j > 0 && nums[j] == nums[j - 1]) continue;
+        for(int i = j+1; i < n - 2; i++){
+            // Skip duplicate elements for the second element
+            
+            if (i > j+1 && nums[i] == nums[i - 1]) continue;
+            
+            
+            int left = i + 1, right = n - 1;
+            
+            while (left < right) {
+                long long sum =(long long)nums[j]+nums[i]+nums[left] + nums[right];
+                
+                if (sum == target) {
+                    result.push_back({nums[j],nums[i], nums[left], nums[right]});
+                    
+                    // Skip duplicates for the 3rd element
+                    while (left < right && nums[left] == nums[left + 1]) left++;
+                    // Skip duplicates for the 4th element
+                    while (left < right && nums[right] == nums[right - 1]) right--;
+                    
+                    left++;
+                    right--;
+                } else if (sum < target) {
+                    left++;
+                } else {
+                    right--;
+                }
+            }
+        }
+        }
+        
+        return result;
+
+        
+    }
+};
