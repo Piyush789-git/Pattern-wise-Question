@@ -1,0 +1,48 @@
+class Solution {
+public:
+bool place(string slot, string word) {
+        if(slot.size() != word.size()) return false;
+        // check left to right
+        bool ok1 = true, ok2 = true;
+        for(int i = 0; i < slot.size(); i++) {
+            if(slot[i] != ' ' && slot[i] != word[i]) ok1 = false;
+            if(slot[i] != ' ' && slot[i] != word[word.size()-1-i]) ok2 = false;
+        }
+        return ok1 || ok2;
+    }
+    bool placeWordInCrossword(vector<vector<char>>& board, string word) {
+        int m = board.size(), n = board[0].size();
+        
+        // check row-wise
+        for(int i = 0; i < m; i++) {
+            string slot = "";
+            for(int j = 0; j <= n; j++) {
+                if(j < n && board[i][j] != '#') {
+                    slot.push_back(board[i][j]);
+                } else {
+                    if(!slot.empty()) {
+                        if(place(slot, word)) return true;
+                        slot.clear();
+                    }
+                }
+            }
+        }
+        
+        // check column-wise
+        for(int j = 0; j < n; j++) {
+            string slot = "";
+            for(int i = 0; i <= m; i++) {
+                if(i < m && board[i][j] != '#') {
+                    slot.push_back(board[i][j]);
+                } else {
+                    if(!slot.empty()) {
+                        if(place(slot, word)) return true;
+                        slot.clear();
+                    }
+                }
+            }
+        }
+        
+        return false; 
+    }
+};
