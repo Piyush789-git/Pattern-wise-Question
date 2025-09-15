@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int leastInterval(vector<char>& tasks, int n) {
+        vector<int>mp(26,0);
+
+        for(char &ch: tasks){
+            mp[ch-'A']++;
+
+        }
+
+        sort(begin(mp),end(mp));
+
+        int maxfreq=mp[25];
+        int gaddhe=mp[25]-1;
+        int idleslot=n*gaddhe;
+
+        for(int i= 24; i>=0; i--){
+           int x= min(mp[i],gaddhe);
+            idleslot-=x;
+        }
+
+if(idleslot>0){
+    return tasks.size()+idleslot;
+}
+return tasks.size();
+    }
+};
